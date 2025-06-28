@@ -1,3 +1,12 @@
-const generateContacts = async (number) => {};
+import { readContacts } from '../utils/readContacts.js';
+import { writeContacts } from '../utils/writeContacts.js';
+import { createFakeContact } from '../utils/createFakeContact.js';
 
-generateContacts(5);
+const generateContacts = async (n = 5) => {
+  const contacts = await readContacts();
+  const newContacts = Array.from({ length: n }, createFakeContact);
+  const updated = [...contacts, ...newContacts];
+  await writeContacts(updated);
+};
+
+generateContacts(28);
